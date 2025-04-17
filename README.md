@@ -3,7 +3,19 @@
 - Created Create-react-app
 - Configured tailwindcss
 - Header
+- Routing of app
 - Login Form
+- Sign Up Form
+- Form Validation
+- UseRef Hook
+- Firebase Backend
+  - setup Firebase in project
+  - enabled authentication from firebase web for email/password
+  - installing firebase cli
+  - deploying using firebase
+  - Create SignUp user account in firebase
+
+# Reading Documentation is a super power of a developer
 
 # Features
 
@@ -17,6 +29,6 @@
     - Movie title and description
     - Movie suggestions
       - Movies list \* n
-- Netfile GPT
+- Netflix GPT
   - Search Bar
   - Movie suggestions

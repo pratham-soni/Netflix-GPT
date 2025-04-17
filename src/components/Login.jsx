@@ -1,10 +1,74 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Header from "./Header";
+import { checkValidData } from "../utils/validate";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+import { auth } from "../utils/firebase";
 
 const Login = () => {
   const [isSignInForm, setIsSignInForm] = useState(true);
+  const [errorMessege, setErrorMessege] = useState(null);
+
+  const email = useRef(null);
+  const password = useRef(null);
+  const name = useRef(null);
+
   const toggleSignInForm = () => {
     setIsSignInForm(!isSignInForm);
+  };
+
+  const handleBtnClick = () => {
+    // validate the form data
+
+    const msg = checkValidData(
+      email?.current?.value,
+      password?.current?.value,
+      name?.current?.value
+    );
+    // console.log(msg);
+    setErrorMessege(msg);
+
+    if (msg) return;
+
+    // SignIn / SignUp
+    if (!isSignInForm) {
+      // SignUp Logic
+      createUserWithEmailAndPassword(
+        auth,
+        email?.current?.value,
+        password?.current?.value
+      )
+        .then((userCredential) => {
+          // Signed up
+          const user = userCredential.user;
+          console.log(user);
+          // ...
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setErrorMessege(errorCode + " - " + errorMessage);
+        });
+    } else {
+      // SignIn Login
+      signInWithEmailAndPassword(
+        auth,
+        email?.current?.value,
+        password?.current?.value
+      )
+        .then((userCredential) => {
+          // Signed in
+          const user = userCredential.user;
+          console.log(user);
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setErrorMessege(errorCode + " - " + errorMessage);
+        });
+    }
   };
 
   return (
@@ -17,28 +81,38 @@ const Login = () => {
           alt="bg-img"
         />
       </div>
-      <form className="absolute p-12 bg-black w-[400px] mt-24 mx-auto right-0 left-0 rounded-lg bg-opacity-80">
+      <form
+        onSubmit={(e) => e.preventDefault()}
+        className="absolute p-12 bg-black w-[400px] mt-24 mx-auto right-0 left-0 rounded-lg bg-opacity-80"
+      >
         <p className="text-4xl p-1 mb-2 text-white font-bold">
           {isSignInForm ? "Sign In" : "Sign Up"}
         </p>
         {!isSignInForm && (
           <input
+            ref={name}
             type="text"
             placeholder="Full Name"
             className="p-4 my-3 w-full rounded-[5px] border border-gray-500 bg-black bg-opacity-20 text-white"
           />
         )}
         <input
+          ref={email}
           type="email"
           placeholder="Email Address"
           className="p-4 my-3 w-full rounded-[5px] border border-gray-500 bg-black bg-opacity-20 text-white"
         />
         <input
+          ref={password}
           type="password"
           placeholder="Password"
           className="p-4 my-3 w-full rounded-[5px] border border-gray-500 bg-black bg-opacity-20 text-white"
         />
-        <button className="p-2 my-3 rounded-[5px] bg-red-500 w-full text-white ">
+        <p className="text-red-500 text-lg font-bold p-2">{errorMessege}</p>
+        <button
+          className="p-2 my-3 rounded-[5px] bg-red-700 w-full text-white hover:bg-red-600"
+          onClick={handleBtnClick}
+        >
           {isSignInForm ? "Sign In" : "Sign Up"}
         </button>
         <p className="text-gray-400" onClick={toggleSignInForm}>
