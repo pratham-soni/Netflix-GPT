@@ -14,6 +14,8 @@
   - installing firebase cli
   - deploying using firebase
   - Create SignUp user account in firebase
+- Created Redux store and user slice
+-
 
 # Reading Documentation is a super power of a developer
 
