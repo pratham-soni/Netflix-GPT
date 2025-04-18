@@ -15,7 +15,9 @@
   - deploying using firebase
   - Create SignUp user account in firebase
 - Created Redux store and user slice
--
+- Implemented Sign-Out
+- Update Profile API
+- Fetch movies from TBDB
 
 # Reading Documentation is a super power of a developer
 
