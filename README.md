@@ -17,7 +17,14 @@
 - Created Redux store and user slice
 - Implemented Sign-Out
 - Update Profile API
+- Bug fixes
+  - SignUp user display name and profile picture update
+  - if the user is not loggedin, redirect to login page if he tries access to browse page and vice versa
+- Unsubscribed to the onAuthStateChanged callback
+- add hardcoded values in constants file
 - Fetch movies from TBDB
+- register for TMDB API
+- Get data from TMDB now playing moview list API
 
 # Reading Documentation is a super power of a developer
 

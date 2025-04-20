@@ -9,6 +9,7 @@ import {
 import { auth } from "../utils/firebase";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
+import { BackgroundIMG, User_Avatar } from "../utils/constants";
 
 const Login = () => {
   const [isSignInForm, setIsSignInForm] = useState(true);
@@ -31,7 +32,6 @@ const Login = () => {
       password?.current?.value,
       name?.current?.value
     );
-    // console.log(msg);
     setErrorMessege(msg);
 
     if (msg) return;
@@ -50,8 +50,7 @@ const Login = () => {
 
           updateProfile(user, {
             displayName: name?.current?.value,
-            photoURL:
-              "https://avatars.githubusercontent.com/u/88421401?s=40&v=4",
+            photoURL: User_Avatar,
           })
             .then(() => {
               // Profile updated!
@@ -65,7 +64,6 @@ const Login = () => {
                   photoURL: photoURL,
                 })
               );
-              console.log(user);
             })
             .catch((error) => {
               // An error occurred
@@ -90,7 +88,6 @@ const Login = () => {
         .then((userCredential) => {
           // Signed in
           const user = userCredential.user;
-          console.log(user);
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -104,11 +101,7 @@ const Login = () => {
     <div>
       <Header />
       <div className="absolute">
-        <img
-          className=""
-          src="https://assets.nflxext.com/ffe/siteui/vlv3/fa4630b1-ca1e-4788-94a9-eccef9f7af86/web/IN-en-20250407-TRIFECTA-perspective_43f6a235-9f3d-47ef-87e0-46185ab6a7e0_large.jpg"
-          alt="bg-img"
-        />
+        <img className="" src={BackgroundIMG} alt="bg-img" />
       </div>
       <form
         onSubmit={(e) => e.preventDefault()}
