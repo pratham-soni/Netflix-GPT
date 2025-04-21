@@ -25,6 +25,14 @@
 - Fetch movies from TBDB
 - register for TMDB API
 - Get data from TMDB now playing moview list API
+- created custome hooks for nowplaying movies
+- update the store with movies data
+- create movie slice
+- planning for main container and secondary container
+- custome hooks (fetch data for trailer video)
+- update store with trailer video data
+- embaded the youtube video and make it autoplay and mute
+- added tailwind css to make the containers owesome
 
 # Reading Documentation is a super power of a developer
 
