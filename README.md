@@ -33,6 +33,7 @@
 - update store with trailer video data
 - embaded the youtube video and make it autoplay and mute
 - added tailwind css to make the containers owesome
+- Building secondary component
 
 # Reading Documentation is a super power of a developer
 
