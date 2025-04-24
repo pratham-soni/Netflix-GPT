@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { addUser, removeUser } from "../utils/userSlice";
 import { NetflixLOGO } from "../utils/constants";
+import { toggleGptSearchView } from "../utils/gptSlice";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -44,11 +45,25 @@ const Header = () => {
         navigate("/error");
       });
   };
+
+  const handleGptDearchClick = () => {
+    // toggle logic
+    dispatch(toggleGptSearchView());
+  };
+
   return (
     <div className="absolute w-screen px-8 py-2 bg-gradient-to-b from-black z-10 flex justify-between">
       <img className="w-44 " src={NetflixLOGO} alt="logo" />
       {user && (
         <div className="flex m-2 p-2 mr-3">
+          <div className="mx-2 px-4">
+            <button
+              onClick={handleGptDearchClick}
+              className="px-2 py-2 mx-2 font-bold text-xl text-white bg-purple-600 rounded-lg hover:bg-purple-500"
+            >
+              GPT Search
+            </button>
+          </div>
           <div className="p-1">
             <img
               alt="user logo"

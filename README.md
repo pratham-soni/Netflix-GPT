@@ -34,6 +34,11 @@
 - embaded the youtube video and make it autoplay and mute
 - added tailwind css to make the containers owesome
 - Building secondary component
+- Build Movie List
+- Build Movie Card
+- TMDB image CDN URL
+- made UI (browse) look better
+- created custom hooks
 
 # Reading Documentation is a super power of a developer
 
