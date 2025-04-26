@@ -6,11 +6,13 @@ import { useEffect } from "react";
 import { addUser, removeUser } from "../utils/userSlice";
 import { NetflixLOGO } from "../utils/constants";
 import { toggleGptSearchView } from "../utils/gptSlice";
-
+import { SUPPORTED_LANGUAGES } from "../utils/constants";
+import { changeLanguage } from "../utils/configSlice";
 const Header = () => {
   const navigate = useNavigate();
   const user = useSelector((store) => store.user);
   const dispatch = useDispatch();
+  const showGptSearch = useSelector((store) => store.gpt.showGptSearch);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -46,9 +48,13 @@ const Header = () => {
       });
   };
 
-  const handleGptDearchClick = () => {
+  const handleGptSearchClick = () => {
     // toggle logic
     dispatch(toggleGptSearchView());
+  };
+
+  const handleLanguageChange = (e) => {
+    dispatch(changeLanguage(e.target.value));
   };
 
   return (
@@ -56,12 +62,26 @@ const Header = () => {
       <img className="w-44 " src={NetflixLOGO} alt="logo" />
       {user && (
         <div className="flex m-2 p-2 mr-3">
+          {showGptSearch && (
+            <div className="mx-2 px-2">
+              <select
+                className="px-4 py-3 bg-black text-white"
+                onChange={handleLanguageChange}
+              >
+                {SUPPORTED_LANGUAGES.map((language) => (
+                  <option key={language.identifier} value={language.identifier}>
+                    {language.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+          )}
           <div className="mx-2 px-4">
             <button
-              onClick={handleGptDearchClick}
+              onClick={handleGptSearchClick}
               className="px-2 py-2 mx-2 font-bold text-xl text-white bg-purple-600 rounded-lg hover:bg-purple-500"
             >
-              GPT Search
+              {showGptSearch ? "Home Page" : "GPT Search"}
             </button>
           </div>
           <div className="p-1">
